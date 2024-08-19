@@ -33,19 +33,15 @@ const TodoList = () => {
   };
 
   const handleUpdate = (id) => {
-    const updatedTodos = [];
-
-    todos.forEach((todo) => {
+    const updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        const updatedTodo = {
+        return {
           id: todo.id,
           text: todo.text,
           completed: !todo.completed,
         };
-
-        updatedTodos.push(updatedTodo);
       } else {
-        updatedTodos.push(todo);
+        return todo;
       }
     });
 
