@@ -28,24 +28,19 @@ const TodoList = () => {
       return;
     }
 
-    setTodos([{ id: crypto.randomUUID(), text: newTodo }, ...todos]);
+    setTodos([
+      { id: crypto.randomUUID(), text: newTodo, completed: false },
+      ...todos,
+    ]);
     setNewTodo("");
   };
 
   const handleUpdate = (id) => {
-    const updatedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return {
-          id: todo.id,
-          text: todo.text,
-          completed: !todo.completed,
-        };
-      } else {
-        return todo;
-      }
-    });
-
-    setTodos(updatedTodos);
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
   };
 
   return (
