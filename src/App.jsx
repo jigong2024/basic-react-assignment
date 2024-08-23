@@ -1,11 +1,14 @@
 import React from "react";
-import TodoList from "./components/TodoList";
+import TodoContainer from "./components/TodoContainer";
+import SampleTodoContext from "../contexts/SampleTodoContext";
 
 const App = () => {
   return (
-    <main className="main-center">
-      <TodoList />
-    </main>
+    <SampleTodoContext.Provider SAMPLE_TODOS={SAMPLE_TODOS}>
+      <main className="main-center">
+        <TodoContainer />
+      </main>
+    </SampleTodoContext.Provider>
   );
 };
 
