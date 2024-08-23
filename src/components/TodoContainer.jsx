@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import TodoList from "./TodoList";
 import TodoFrom from "./TodoForm";
+import StyledComponents from "./StyledComponents";
 import SampleTodoContext from "../contexts/SampleTodoContext";
 
 const TodoContainer = () => {
@@ -37,6 +38,7 @@ const TodoContainer = () => {
 
   return (
     <div>
+      <StyledComponents />
       <TodoFrom
         handleSubmit={handleSubmit}
         newTodo={newTodo}
