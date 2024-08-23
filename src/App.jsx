@@ -1,11 +1,13 @@
 import React from "react";
 import TodoContainer from "./components/TodoContainer";
-import SampleTodoContext from "../contexts/SampleTodoContext";
+import "./App.css";
+import SampleTodoContext from "./contexts/SampleTodoContext";
+import SAMPLE_TODOS from "./contexts/SampleTodo";
 
 const App = () => {
   return (
-    <SampleTodoContext.Provider SAMPLE_TODOS={SAMPLE_TODOS}>
-      <main className="main-center">
+    <SampleTodoContext.Provider value={SAMPLE_TODOS}>
+      <main className="main-container">
         <TodoContainer />
       </main>
     </SampleTodoContext.Provider>
