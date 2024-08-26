@@ -1,5 +1,3 @@
-import React from "react";
-
 const TodoForm = ({ handleSubmit, newTodo, setNewTodo }) => {
   const handleInputChange = (e) => {
     setNewTodo(e.target.value);

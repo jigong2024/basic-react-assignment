@@ -1,4 +1,3 @@
-import React from "react";
 import TodoContainer from "./components/TodoContainer";
 import "./App.css";
 import SampleTodoContext from "./contexts/SampleTodoContext";
