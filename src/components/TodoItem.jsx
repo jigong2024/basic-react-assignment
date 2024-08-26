@@ -1,21 +1,20 @@
+import styled from "styled-components";
+
 const TodoItem = ({ todo, handleUpdate, handleDelete }) => {
   return (
-    <div>
-      <li
-        style={{
-          marginTop: "20px",
-        }}
-        key={todo.id}
-      >
-        {`${todo.text} ---- ${todo.completed ? "(완료)" : "(진행중)"}`} <br />
-        <button
+    <List key={todo.id}>
+      {`${todo.text} ---- ${todo.completed ? "(완료)" : "(진행중)"}`}
+      <div>
+        <Button
+          btnColor="rgb(88 43 231)"
           onClick={() => {
             handleUpdate(todo.id);
           }}
         >
           {todo.completed ? "취소" : "완료"}
-        </button>
-        <button
+        </Button>
+        <Button
+          btnColor="rgb(244 54 73)"
           onClick={() => {
             handleDelete(todo.id);
           }}
@@ -24,10 +23,39 @@ const TodoItem = ({ todo, handleUpdate, handleDelete }) => {
           }}
         >
           삭제
-        </button>
-      </li>
-    </div>
+        </Button>
+      </div>
+    </List>
   );
 };
 
 export default TodoItem;
+
+const List = styled.div`
+  background-color: rgb(255 255 255);
+  border-radius: 4px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  flex-direction: row;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+  /* width: 100%; */
+`;
+
+const Button = styled.button`
+  background-color: ${({ btnColor }) => btnColor};
+  color: white;
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 80%;
+  }
+`;

@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import TodoList from "./TodoList";
-import TodoFrom from "./TodoForm";
+import TodoForm from "./TodoForm";
+
 // import StyledComponents from "./StyledComponents";
 import SampleTodoContext from "../contexts/SampleTodoContext";
+import styled from "styled-components";
 
 const TodoContainer = () => {
   const sampleTodos = useContext(SampleTodoContext);
@@ -37,9 +39,9 @@ const TodoContainer = () => {
   };
 
   return (
-    <div>
+    <SecondContainer>
       {/* <StyledComponents /> */}
-      <TodoFrom
+      <TodoForm
         handleSubmit={handleSubmit}
         newTodo={newTodo}
         setNewTodo={setNewTodo}
@@ -49,8 +51,13 @@ const TodoContainer = () => {
         handleUpdate={handleUpdate}
         handleDelete={handleDelete}
       />
-    </div>
+    </SecondContainer>
   );
 };
 
 export default TodoContainer;
+
+const SecondContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

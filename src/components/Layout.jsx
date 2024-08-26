@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { ClipboardCheck, Monitor, Video } from "lucide-react";
 
@@ -85,6 +85,7 @@ const Box = styled.div`
   justify-content: space-between;
   padding: 10px;
   color: white;
+  font-size: 0.8rem;
 
   background-color: ${({ bgColor }) => bgColor};
 `;
