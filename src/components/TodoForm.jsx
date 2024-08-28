@@ -1,4 +1,9 @@
-const TodoForm = ({ handleSubmit, newTodo, setNewTodo }) => {
+import { useContext } from "react";
+import TodoContext from "../context/TodoContext";
+
+const TodoForm = () => {
+  const { handleSubmit, newTodo, setNewTodo } = useContext(TodoContext);
+
   const handleInputChange = (e) => {
     setNewTodo(e.target.value);
   };

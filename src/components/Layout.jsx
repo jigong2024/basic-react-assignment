@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
       <SectionContainer>
         <h1>Quick Access</h1>
         <div>
-          <Box bgColor="rgb(231 88 44)" width="2">
+          <Box color="rgb(231 88 44)" width="2">
             <span>
               <ClipboardCheck />
             </span>
@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
               New Tasks
             </span>
           </Box>
-          <Box bgColor="rgb(88 43 231)" width="0.9">
+          <Box color="rgb(88 43 231)" width="0.9">
             <span>
               <Monitor />
             </span>
@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
               Active Projects
             </span>
           </Box>
-          <Box bgColor="rgb(37 37 37)" width="1.1">
+          <Box color="rgb(37 37 37)" width="1.1">
             <span>
               <Video />
             </span>
@@ -87,5 +87,5 @@ const Box = styled.div`
   color: white;
   font-size: 0.8rem;
 
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({ color }) => color};
 `;

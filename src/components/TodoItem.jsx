@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import TodoContext from "../context/TodoContext";
 
-const TodoItem = ({ todo, handleUpdate, handleDelete }) => {
+const TodoItem = ({ todo }) => {
+  const { handleUpdate, handleDelete } = useContext(TodoContext);
+
   return (
     <List key={todo.id}>
       {`${todo.text} ---- ${todo.completed ? "(완료)" : "(진행중)"}`}
       <div>
         <Button
-          btnColor="rgb(88 43 231)"
+          btn="rgb(88 43 231)"
           onClick={() => {
             handleUpdate(todo.id);
           }}
@@ -14,7 +18,7 @@ const TodoItem = ({ todo, handleUpdate, handleDelete }) => {
           {todo.completed ? "취소" : "완료"}
         </Button>
         <Button
-          btnColor="rgb(244 54 73)"
+          btn="rgb(244 54 73)"
           onClick={() => {
             handleDelete(todo.id);
           }}
@@ -45,7 +49,7 @@ const List = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: ${({ btnColor }) => btnColor};
+  background-color: ${({ btn }) => btn};
   color: white;
   width: 30px;
   height: 20px;

@@ -1,17 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import TodoItem from "./TodoItem";
 import styled from "styled-components";
+import TodoContext from "../context/TodoContext";
 
-const TodoList = ({ todos, handleUpdate, handleDelete }) => {
+const TodoList = () => {
+  const { todos, handleUpdate, handleDelete } = useContext(TodoContext);
+
   return (
     <ListContainer>
       {todos.map((todo) => (
-        <TodoItem
-          key={todo.id}
-          todo={todo}
-          handleUpdate={handleUpdate}
-          handleDelete={handleDelete}
-        />
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </ListContainer>
   );
