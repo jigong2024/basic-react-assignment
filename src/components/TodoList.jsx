@@ -4,7 +4,7 @@ import styled from "styled-components";
 import TodoContext from "../context/TodoContext";
 
 const TodoList = () => {
-  const { todos, handleUpdate, handleDelete } = useContext(TodoContext);
+  const { todos } = useContext(TodoContext);
 
   return (
     <ListContainer>

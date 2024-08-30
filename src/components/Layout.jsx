@@ -1,8 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { ClipboardCheck, Monitor, Video } from "lucide-react";
+import TodoContext from "../context/TodoContext";
 
 const Layout = ({ children }) => {
+  const { todos } = useContext(TodoContext);
+
   return (
     <MainContainer>
       <SectionContainer>
@@ -13,7 +16,7 @@ const Layout = ({ children }) => {
               <ClipboardCheck />
             </span>
             <span>
-              16
+              {todos.length}
               <br />
               New Tasks
             </span>

@@ -10,7 +10,7 @@ const TodoItem = ({ todo }) => {
       {`${todo.text} ---- ${todo.completed ? "(완료)" : "(진행중)"}`}
       <div>
         <Button
-          btn="rgb(88 43 231)"
+          $btn="rgb(88 43 231)"
           onClick={() => {
             handleUpdate(todo.id);
           }}
@@ -18,7 +18,7 @@ const TodoItem = ({ todo }) => {
           {todo.completed ? "취소" : "완료"}
         </Button>
         <Button
-          btn="rgb(244 54 73)"
+          $btn="rgb(244 54 73)"
           onClick={() => {
             handleDelete(todo.id);
           }}
@@ -49,7 +49,7 @@ const List = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: ${({ btn }) => btn};
+  background-color: ${({ $btn }) => $btn};
   color: white;
   width: 30px;
   height: 20px;

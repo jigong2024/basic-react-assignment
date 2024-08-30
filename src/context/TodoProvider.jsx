@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
 import TodoContext from "./TodoContext";
-import SampleTodoContext from "./SampleTodoContext";
+import SAMPLE_TODOS from "./SampleTodo";
 
 const TodoProvider = ({ children }) => {
-  const sampleTodos = useContext(SampleTodoContext);
-
-  const [todos, setTodos] = useState(sampleTodos);
+  const [todos, setTodos] = useState(SAMPLE_TODOS);
 
   const [newTodo, setNewTodo] = useState("");
 
