@@ -1,13 +1,16 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import TodoContext from "../context/TodoContext";
+import { Link } from "react-router-dom";
 
 const TodoItem = ({ todo }) => {
   const { handleUpdate, handleDelete } = useContext(TodoContext);
 
   return (
     <List key={todo.id}>
-      {`${todo.text} ---- ${todo.completed ? "(완료)" : "(진행중)"}`}
+      <Link to={`/todos/${todo.id}`}>
+        {`${todo.text} ---- ${todo.completed ? "(완료)" : "(진행중)"}`}
+      </Link>
       <div>
         <Button
           $btn="rgb(88 43 231)"

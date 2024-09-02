@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ClipboardCheck, Monitor, Video } from "lucide-react";
 import TodoContext from "../context/TodoContext";
+import { Outlet } from "react-router-dom";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const { todos } = useContext(TodoContext);
 
   return (
@@ -43,7 +44,9 @@ const Layout = ({ children }) => {
       </SectionContainer>
       <SectionContainer>
         <h1>Today's Tasks</h1>
-        <section>{children}</section>
+        <section>
+          <Outlet />
+        </section>
       </SectionContainer>
     </MainContainer>
   );
