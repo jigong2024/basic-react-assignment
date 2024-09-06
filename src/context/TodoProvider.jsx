@@ -4,7 +4,6 @@ import SAMPLE_TODOS from "./SampleTodo";
 
 const TodoProvider = ({ children }) => {
   const [todos, setTodos] = useState(SAMPLE_TODOS);
-
   const [newTodo, setNewTodo] = useState("");
 
   const handleSubmit = (e) => {
@@ -33,6 +32,9 @@ const TodoProvider = ({ children }) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
+  const completedTodos = todos.filter((todo) => todo.completed);
+  const pendingTodos = todos.filter((todo) => !todo.completed);
+
   return (
     <TodoContext.Provider
       value={{
@@ -42,6 +44,8 @@ const TodoProvider = ({ children }) => {
         handleSubmit,
         handleUpdate,
         handleDelete,
+        completedTodos,
+        pendingTodos,
       }}
     >
       {children}

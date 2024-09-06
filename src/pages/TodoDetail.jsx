@@ -11,14 +11,8 @@ const TodoDetail = () => {
 
   const foundTodo = todos.find((todo) => todo.id === id);
 
-  useEffect(() => {
-    if (!foundTodo) {
-      navigate("/");
-    }
-  }, [foundTodo, navigate]);
-
   if (!foundTodo) {
-    return null;
+    return <div>404 not found todo!</div>;
   }
 
   return (

@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { ClipboardCheck, Monitor, Video } from "lucide-react";
 import TodoContext from "../context/TodoContext";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useSearchParams } from "react-router-dom";
 
 const Layout = () => {
-  const { todos } = useContext(TodoContext);
+  const { todos, completedTodos, pendingTodos } = useContext(TodoContext);
+  const [searchParams] = useSearchParams();
+  const filter = searchParams.get("filter");
 
   return (
     <MainContainer>
@@ -16,29 +18,34 @@ const Layout = () => {
             <span>
               <ClipboardCheck />
             </span>
-            <span>
+            <ClickSpan to="/" $highlight={!filter}>
               {todos.length}
               <br />
               New Tasks
-            </span>
+            </ClickSpan>
           </Box>
           <Box color="rgb(88 43 231)" width="0.9">
             <span>
               <Monitor />
             </span>
-            <span>
-              4<br />
+            <ClickSpan
+              to="?filter=completed"
+              $highlight={filter === "completed"}
+            >
+              {completedTodos.length}
+              <br />
               Active Projects
-            </span>
+            </ClickSpan>
           </Box>
           <Box color="rgb(37 37 37)" width="1.1">
             <span>
               <Video />
             </span>
-            <span>
-              2<br />
+            <ClickSpan to="?filter=pending" $highlight={filter === "pending"}>
+              {pendingTodos.length}
+              <br />
               Meeting
-            </span>
+            </ClickSpan>
           </Box>
         </div>
       </SectionContainer>
@@ -94,4 +101,11 @@ const Box = styled.div`
   font-size: 0.8rem;
 
   background-color: ${({ color }) => color};
+`;
+
+const ClickSpan = styled(Link)`
+  display: flex;
+  flex-direction: column;
+
+  text-decoration: ${({ $highlight }) => ($highlight ? "underline" : "none")};
 `;

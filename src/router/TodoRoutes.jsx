@@ -7,16 +7,16 @@ import TodoProvider from "../context/TodoProvider";
 
 const TodoRoutes = () => {
   return (
-    <TodoProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <TodoProvider>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
           </Route>
           <Route path="/todos/:id" element={<TodoDetail />} />
         </Routes>
-      </BrowserRouter>
-    </TodoProvider>
+      </TodoProvider>
+    </BrowserRouter>
   );
 };
 
