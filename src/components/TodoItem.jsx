@@ -8,14 +8,14 @@ const TodoItem = ({ todo }) => {
 
   return (
     <List key={todo.id}>
-      <Link to={`/todos/${todo.id}`}>
+      <StyledLink to={`/todos/${todo.id}`} $completed={todo.completed}>
         {`${todo.text} ---- ${todo.completed ? "(완료)" : "(진행중)"}`}
-      </Link>
+      </StyledLink>
       <div>
         <Button
           $btn="rgb(88 43 231)"
           onClick={() => {
-            handleUpdate(todo.id);
+            handleUpdate(todo.id, !todo.completed);
           }}
         >
           {todo.completed ? "취소" : "완료"}
@@ -49,6 +49,12 @@ const List = styled.div`
   font-size: 0.8rem;
   flex-wrap: wrap;
   /* width: 100%; */
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: ${({ $completed }) =>
+    $completed ? "line-through" : "none"};
+  color: ${({ $completed }) => ($completed ? "gray" : "inherit")};
 `;
 
 const Button = styled.button`
