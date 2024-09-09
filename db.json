@@ -1,16 +1,6 @@
 {
   "todos": [
     {
-      "id": "19e0",
-      "text": "밥먹기",
-      "completed": false
-    },
-    {
-      "id": "34f4",
-      "text": "수영하기",
-      "completed": true
-    },
-    {
       "id": "cdc7",
       "text": "춤추기",
       "completed": true
