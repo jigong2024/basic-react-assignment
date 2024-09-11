@@ -1,7 +1,37 @@
 import axios from "axios";
 
-const todoClient = axios.create({
+export const todoClient = axios.create({
   baseURL: "http://localhost:3000/todos",
 });
 
-export default todoClient;
+export const getTodos = async () => {
+  const { data } = await todoClient.get("/");
+
+  return data;
+};
+
+export const getTodoDetail = async (id) => {
+  const { data } = await todoClient.get(`/${id}`);
+
+  return data;
+};
+
+export const postTodo = async (newTodo) => {
+  const { data } = await todoClient.post("/", newTodo);
+
+  return data;
+};
+
+export const toggleTodo = async ({ id, completed }) => {
+  const { data } = await todoClient.patch(`/${id}`, {
+    completed,
+  });
+
+  return data;
+};
+
+export const deleteTodo = async (id) => {
+  const { data } = await todoClient.delete(`/${id}`);
+
+  return data;
+};
