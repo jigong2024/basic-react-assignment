@@ -5,11 +5,11 @@ import TodoRoutes from "./router/TodoRoutes";
 const queryClient = new QueryClient();
 
 const App = () => {
-  return;
-
-  <QueryClientProvider client={queryClient}>
-    <TodoRoutes />;
-  </QueryClientProvider>;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TodoRoutes />
+    </QueryClientProvider>
+  );
 };
 
 export default App;

@@ -1,12 +1,27 @@
-import { useContext } from "react";
-import TodoContext from "../context/TodoContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import styled from "styled-components";
+import { postTodo } from "../api/TodoClient";
 
 const TodoForm = () => {
-  const { handleSubmit, newTodo, setNewTodo } = useContext(TodoContext);
+  const queryClient = useQueryClient();
 
-  const handleInputChange = (e) => {
-    setNewTodo(e.target.value);
+  const [inputValue, setInputValue] = useState("");
+
+  const { mutate } = useMutation({
+    mutationFn: (newTodo) => postTodo(newTodo),
+    onSuccess: () => {
+      alert("투두 추가 성공!");
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newTodo = { text: inputValue, completed: false };
+
+    mutate(newTodo);
   };
 
   return (
@@ -14,8 +29,8 @@ const TodoForm = () => {
       <form onSubmit={handleSubmit}>
         <Input
           type="text"
-          value={newTodo}
-          onChange={handleInputChange}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           placeholder="Enter a new todo"
         />
         <Button type="submit">Add Todo</Button>

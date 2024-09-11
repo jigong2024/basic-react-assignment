@@ -1,13 +1,29 @@
-import React, { useContext } from "react";
 import styled from "styled-components";
 import { ClipboardCheck, Monitor, Video } from "lucide-react";
-import TodoContext from "../context/TodoContext";
 import { Link, Outlet, useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getTodos } from "../api/TodoClient";
 
 const Layout = () => {
-  const { todos, completedTodos, pendingTodos } = useContext(TodoContext);
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("filter");
+
+  const {
+    data: todoList,
+    isPending,
+    isError,
+  } = useQuery({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+  });
+
+  if (isPending) {
+    return <div>로딩중...</div>;
+  }
+
+  if (isError) {
+    return <div>에러 발생: {error.message}</div>;
+  }
 
   return (
     <MainContainer>
@@ -19,7 +35,7 @@ const Layout = () => {
               <ClipboardCheck />
             </span>
             <ClickSpan to="/" $highlight={!filter}>
-              {todos.length}
+              {todoList.length}
               <br />
               New Tasks
             </ClickSpan>
@@ -32,7 +48,7 @@ const Layout = () => {
               to="?filter=completed"
               $highlight={filter === "completed"}
             >
-              {completedTodos.length}
+              {todoList.length}
               <br />
               Active Projects
             </ClickSpan>
@@ -42,7 +58,7 @@ const Layout = () => {
               <Video />
             </span>
             <ClickSpan to="?filter=pending" $highlight={filter === "pending"}>
-              {pendingTodos.length}
+              {todoList.length}
               <br />
               Meeting
             </ClickSpan>

@@ -1,15 +1,31 @@
-import React, { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import TodoContext from "../context/TodoContext";
 import TodoItem from "../components/TodoItem";
 import styled from "styled-components";
+import { useQuery } from "@tanstack/react-query";
+import { getTodos } from "../api/TodoClient";
 
 const TodoDetail = () => {
   const { id } = useParams();
-  const { todos } = useContext(TodoContext);
   const navigate = useNavigate();
 
-  const foundTodo = todos.find((todo) => todo.id === id);
+  const {
+    data: todoList,
+    isPending,
+    isError,
+  } = useQuery({
+    queryKey: ["todos"],
+    queryFn: getTodos,
+  });
+
+  if (isPending) {
+    return <div>로딩중 ...</div>;
+  }
+
+  if (isError) {
+    return <div>에러 발생: {error.message}</div>;
+  }
+
+  const foundTodo = todoList.find((todo) => todo.id === id);
 
   if (!foundTodo) {
     return <div>404 not found todo!</div>;

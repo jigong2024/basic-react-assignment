@@ -1,10 +1,27 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import TodoContext from "../context/TodoContext";
 import { Link } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteTodo, toggleTodo } from "../api/TodoClient";
 
 const TodoItem = ({ todo }) => {
-  const { handleUpdate, handleDelete } = useContext(TodoContext);
+  const queryClient = useQueryClient();
+
+  const { mutate: remove } = useMutation({
+    mutationFn: (id) => deleteTodo(id),
+    onSuccess: () => {
+      alert("삭제 성공>ㅡ<");
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
+
+  const { mutate: edit } = useMutation({
+    mutationFn: ({ id, completed }) => toggleTodo({ id, completed }),
+    onSuccess: () => {
+      alert("수정 성~공");
+      queryClient.invalidateQueries(["todos"]);
+    },
+  });
 
   return (
     <List key={todo.id}>
@@ -15,7 +32,7 @@ const TodoItem = ({ todo }) => {
         <Button
           $btn="rgb(88 43 231)"
           onClick={() => {
-            handleUpdate(todo.id, !todo.completed);
+            edit({ id: todo.id, completed: !todo.completed });
           }}
         >
           {todo.completed ? "취소" : "완료"}
@@ -23,7 +40,7 @@ const TodoItem = ({ todo }) => {
         <Button
           $btn="rgb(244 54 73)"
           onClick={() => {
-            handleDelete(todo.id);
+            remove(todo.id);
           }}
           style={{
             marginLeft: "10px",
