@@ -1,28 +1,13 @@
 {
   "todos": [
     {
-      "id": "1f39",
-      "text": "json-server 공부하기",
+      "id": "ca51",
+      "text": "",
       "completed": false
     },
     {
-      "id": "b8a7",
-      "text": "mutate",
-      "completed": true
-    },
-    {
-      "id": "0bc5",
-      "text": "dddd",
-      "completed": false
-    },
-    {
-      "id": "ffc1",
-      "text": "",
-      "completed": true
-    },
-    {
-      "id": "1719",
-      "text": "",
+      "id": "eff7",
+      "text": "ddd",
       "completed": false
     }
   ]

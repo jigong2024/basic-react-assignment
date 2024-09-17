@@ -3,25 +3,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteTodo, toggleTodo } from "../api/TodoClient";
+import {
+  useDeleteTodoMutation,
+  useToggleTodoMutaiton,
+} from "../hooks/useTodoMutation";
 
 const TodoItem = ({ todo }) => {
-  const queryClient = useQueryClient();
-
-  const { mutate: remove } = useMutation({
-    mutationFn: (id) => deleteTodo(id),
-    onSuccess: () => {
-      alert("삭제 성공>ㅡ<");
-      queryClient.invalidateQueries(["todos"]);
-    },
-  });
-
-  const { mutate: edit } = useMutation({
-    mutationFn: ({ id, completed }) => toggleTodo({ id, completed }),
-    onSuccess: () => {
-      alert("수정 성~공");
-      queryClient.invalidateQueries(["todos"]);
-    },
-  });
+  const { mutateAsync: remove, isPending } = useDeleteTodoMutation();
+  const { mutate: edit } = useToggleTodoMutaiton();
 
   return (
     <List key={todo.id}>
