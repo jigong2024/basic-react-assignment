@@ -6,12 +6,16 @@ import { getTodos } from "../api/TodoClient";
 
 const TodoDetail = () => {
   const { id } = useParams();
+
+  // console.log("아이디", id);
+
   const navigate = useNavigate();
 
   const {
     data: todoList,
     isPending,
     isError,
+    error,
   } = useQuery({
     queryKey: ["todos"],
     queryFn: getTodos,

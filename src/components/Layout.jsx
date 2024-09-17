@@ -8,22 +8,20 @@ const Layout = () => {
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("filter");
 
-  const {
-    data: todoList,
-    isPending,
-    isError,
-  } = useQuery({
+  const { data: allTodos } = useQuery({
     queryKey: ["todos"],
     queryFn: getTodos,
   });
 
-  if (isPending) {
-    return <div>로딩중...</div>;
-  }
+  const { data: completedTodos } = useQuery({
+    queryKey: ["todos", "completed"],
+    queryFn: () => getTodos("completed"),
+  });
 
-  if (isError) {
-    return <div>에러 발생: {error.message}</div>;
-  }
+  const { data: pendingTodos } = useQuery({
+    queryKey: ["todos", "pending"],
+    queryFn: () => getTodos("pending"),
+  });
 
   return (
     <MainContainer>
@@ -35,7 +33,7 @@ const Layout = () => {
               <ClipboardCheck />
             </span>
             <ClickSpan to="/" $highlight={!filter}>
-              {todoList.length}
+              {allTodos?.length}
               <br />
               New Tasks
             </ClickSpan>
@@ -48,7 +46,7 @@ const Layout = () => {
               to="?filter=completed"
               $highlight={filter === "completed"}
             >
-              {todoList.length}
+              {completedTodos?.length}
               <br />
               Active Projects
             </ClickSpan>
@@ -58,7 +56,7 @@ const Layout = () => {
               <Video />
             </span>
             <ClickSpan to="?filter=pending" $highlight={filter === "pending"}>
-              {todoList.length}
+              {pendingTodos?.length}
               <br />
               Meeting
             </ClickSpan>

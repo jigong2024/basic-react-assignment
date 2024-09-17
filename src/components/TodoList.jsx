@@ -6,14 +6,16 @@ import { useSearchParams } from "react-router-dom";
 
 const TodoList = () => {
   const [searchParams] = useSearchParams();
+  const filter = searchParams.get("filter");
 
   const {
     data: todoList,
     isPending,
     isError,
+    error,
   } = useQuery({
-    queryKey: ["todos"],
-    queryFn: getTodos,
+    queryKey: ["todos", filter],
+    queryFn: () => getTodos(filter),
   });
 
   if (isPending) {
