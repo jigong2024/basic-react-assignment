@@ -3,20 +3,10 @@ import TodoItem from "./TodoItem";
 import styled from "styled-components";
 import { getTodos } from "../api/TodoClient";
 import { useSearchParams } from "react-router-dom";
+import { useTodoFilteredQuey } from "../hooks/useTodoQuery";
 
 const TodoList = () => {
-  const [searchParams] = useSearchParams();
-  const filter = searchParams.get("filter");
-
-  const {
-    data: todoList,
-    isPending,
-    isError,
-    error,
-  } = useQuery({
-    queryKey: ["todos", filter],
-    queryFn: () => getTodos(filter),
-  });
+  const { data: todoList, isPending, isError, error } = useTodoFilteredQuey();
 
   if (isPending) {
     return <div>로딩중...</div>;

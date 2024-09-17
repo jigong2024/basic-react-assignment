@@ -3,25 +3,15 @@ import { ClipboardCheck, Monitor, Video } from "lucide-react";
 import { Link, Outlet, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getTodos } from "../api/TodoClient";
+import { useTodoQuery } from "../hooks/useTodoQuery";
 
 const Layout = () => {
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("filter");
 
-  const { data: allTodos } = useQuery({
-    queryKey: ["todos"],
-    queryFn: getTodos,
-  });
-
-  const { data: completedTodos } = useQuery({
-    queryKey: ["todos", "completed"],
-    queryFn: () => getTodos("completed"),
-  });
-
-  const { data: pendingTodos } = useQuery({
-    queryKey: ["todos", "pending"],
-    queryFn: () => getTodos("pending"),
-  });
+  const { data: allTodos } = useTodoQuery();
+  const { data: completedTodos } = useTodoQuery("completed");
+  const { data: pendingTodos } = useTodoQuery("pending");
 
   return (
     <MainContainer>
